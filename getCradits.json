@@ -1,0 +1,57 @@
+{
+  "errorMsg": "错误",
+  "result": {
+    "data": [
+      {
+        "cj": "75",
+        "cjlx": "选修",
+        "cjxz": "首修",
+        "id": 2,
+        "jhkcdm": "0250",
+        "jhxf": 65.0,
+        "kcmc": "java web",
+        "kscj": "68",
+        "pscj": "65",
+        "xf": 4.0,
+        "xh": "admin",
+        "xm": "赵甲",
+        "xn": "2016-2017",
+        "xq": "第二学期"
+      },
+      {
+        "cj": "75",
+        "cjlx": "必修",
+        "cjxz": "首修",
+        "id": 2,
+        "jhkcdm": "0250",
+        "jhxf": 65.0,
+        "kcmc": "java web",
+        "kscj": "68",
+        "pscj": "65",
+        "xf": 4.0,
+        "xh": "admin",
+        "xm": "赵甲",
+        "xn": "2016-2017",
+        "xq": "第二学期"
+      },
+      {
+        "cj": "75",
+        "cjlx": "必修",
+        "cjxz": "首修",
+        "id": 2,
+        "jhkcdm": "0250",
+        "jhxf": 65.0,
+        "kcmc": "java web",
+        "kscj": "68",
+        "pscj": "65",
+        "xf": 4.0,
+        "xh": "admin",
+        "xm": "赵甲",
+        "xn": "2016-2017",
+        "xq": "第二学期"
+      }
+    ],
+    "total": 1
+  },
+  "resultCode": 0
+}
