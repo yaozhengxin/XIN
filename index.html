@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="xin.css">
+    <!--<script src="jquery-1.9.1.min.js"></script>-->
+    <!--<script src="xin.js"></script>-->
+    <!--<script src="myframe.js"></script>-->
+    <script src="xin.zp.min.js"></script>
+
+    <style>
+        .testClass {
+            background-color: red;
+        }
+
+        .Grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .Grid-cell {
+            flex: 1;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="explain">
+    此同用框架适用于移动端开发，融合了zepto。 <br>
+    从1800行开始zepto的基础上二次开发，包涵大多数开发常用方法的封装，避免重复造轮子建议使用封装的字符串模板。<br>
+    为了不与zepto的$符号冲突，此框架二次开发的方法多数以X区别$符号。 <br>
+    以下js脚本和框架注释中均详细使用方法。
+</div>
+
+<div>
+    <button class="fadeToggle">fadeToggle</button>
+</div>
+<div>
+    <button class="btn-">提示（确定取消）</button>
+</div>
+<div>
+    <button class="btn-c">提示（确定）</button>
+</div>
+<div>
+    <button class="loading">loading</button>
+</div>
+<div>
+    <button class="poptips-btn">poptips</button>
+</div>
+<hr>
+
+<div>
+    获取问号前面的url地址
+    <div class="before" style="word-break: break-all"></div>
+</div>
+
+<div>
+    查询字符串
+    <input type="text" class="url-key" placeholder="请输入查询字符串">
+    <button class="url-key-btn">查询</button>
+</div>
+
+<div id="other">
+
+</div>
+
+<!--<script src="xin.jQ.js"></script>-->
+<!--<script src="zepto.js"></script>-->
+<!--<script src="xin.zp.min.js"></script>-->
+<!--<script src="xin.1.1.js"></script>-->
+<!--<script src="xin.1.0.js"></script>-->
+<!--<script src="arm.js"></script>-->
+<!--<script src="jquery.js"></script>-->
+
+
+<script>
+    var data = {
+        "list": [
+            {
+                "title": "这是title",
+                "url": "http://www.cnblogs.com/52fhy/p/5271447.html",
+                "desc": "摘要"
+            },
+            {
+                "title": "这是title2",
+                "url": "http://www.cnblogs.com/52fhy/p/4823390.html",
+                "desc": "摘要"
+            }]
+    }
+
+
+</script>
+
+<script type="text/javascript">
+
+
+    function handleAjax(url, param, type, dataType) {
+        function ajax(url, param, type, dataType) {
+            return $.ajax({
+                url: url,
+                data: param || {},
+                type: type || 'GET',
+                dataType: dataType || 'json'
+            });
+        }
+
+        return ajax(url, param, type, dataType).then(function (resp) {
+            // 成功回调
+            if (resp.resultCode == 0) {
+                // 直接返回要处理的数据，作为默认参数传入之后done()方法的回调
+                return resp.result.data;
+            }
+            else {
+                // 返回一个失败状态的deferred对象，把错误代码作为默认参数传入之后fail()方法的回调
+                return $.Deferred().reject(resp.errorMsg);
+            }
+        }, function (err) {
+            // 失败回调
+            // 打印状态码
+            console.log(err.status);
+        });
+    }
+
+
+    handleAjax('getCradits.json', {page: 10}).done(function (resp) {
+        //      当result为true的回调
+        console.log(resp)
+    }).fail(function (err) {
+        //      当result为false的回调
+        console.log(err)
+    });
+
+
+</script>
+
+
+<script>
+
+    console.log(X.createRandomId())
+
+    //简单的模板封装
+    user = {
+        "name": "姚正新"
+    }
+    var aa = "欢迎@(name)来到百度世界"
+    console.log('----')
+    console.log(X.formateString(aa, user))
+    console.log('----')
+
+    $('.fadeToggle').click(function () {
+        $('.explain').fadeToggle(500, function () {
+            console.log(123)
+        })
+    });
+    $('.loading').click(function () {
+        $.loading.open({
+            content: '正在加载'
+        });
+
+        setTimeout(function () {
+            $.loading.close()
+        }, 2000)
+    });
+
+    $('.btn-').click(function () {
+        $.alert({
+            title: '提示',
+            content: '请在这里输入内容',
+            buttons: '["取消","确定"]',
+            onConfirm: function () {
+                alert('你点击了确定')
+            },
+            onCancel: function () {
+                alert('你点击了取消')
+            }
+        });
+    });
+
+    $('.btn-c').click(function () {
+        $.alert({
+            title: '提示',
+            content: '请在这里输入内容',
+            buttons: '["确定"]'
+        });
+    });
+    $('.poptips-btn').click(function () {
+        $.poptips('poptipspoptips简单提示')
+    });
+
+    $('.before').html(X.getDocumentUrl())
+
+    //浏览器url的查询字符串
+    $('.url-key-btn').click(function () {
+        var value = $('.url-key').val()
+        $('.url-key').val(X.getQueryString(value))
+    });
+
+
+    //查询字符串
+    X.store.set('aq', 'ac')
+    X.store.get('aq');
+    console.log(X.store.get('aq'))
+
+
+</script>
+
+
+</body>
+</html>
